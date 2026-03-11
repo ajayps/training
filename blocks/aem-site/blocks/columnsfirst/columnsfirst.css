@@ -1,0 +1,25 @@
+/ * This file contains the CSS styles specific to the "columnsfirst" block, defining its layout and appearance. */
+
+.columnsfirst {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px; /* Adjust for gutter spacing */
+}
+
+.columnsfirst > div {
+  flex: 1 1 calc(33.333% - 30px); /* Three columns layout with spacing */
+  margin: 15px; /* Gutter spacing */
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .columnsfirst > div {
+    flex: 1 1 calc(50% - 30px); /* Two columns layout for tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .columnsfirst > div {
+    flex: 1 1 100%; /* Single column layout for mobile */
+  }
+}

@@ -1,0 +1,25 @@
+/* Additional global styling for below-the-fold content */ 
+
+.columns-first {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -15px;
+}
+
+.columns-first > div {
+  flex: 1 1 calc(33.333% - 30px);
+  margin: 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .columns-first > div {
+    flex: 1 1 calc(50% - 30px);
+  }
+}
+
+@media (max-width: 600px) {
+  .columns-first > div {
+    flex: 1 1 100%;
+  }
+}
