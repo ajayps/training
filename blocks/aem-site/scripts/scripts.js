@@ -1,1 +1,0 @@
-// This file contains global JavaScript utilities and serves as the main entry point for page decoration.
