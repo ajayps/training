@@ -72,15 +72,16 @@
 .carousel.block .carousel__body h2 {
   margin: 0 0 8px;
   font-weight: 800;
-  font-size: clamp(22px, 5vw, 42px);
-  line-height: 1.15;
+  font-size: clamp(22px, 0vw, 20px);
+  line-height: 2.15;
+  
 }
 
 
 .carousel.block .carousel__body p {
   margin: 0 0 14px;
   font-size: clamp(14px, 2.2vw, 18px);
-  line-height: 1.5;
+  line-height: 2.5;
   max-width: 70ch;
   opacity: .95;
 }
@@ -242,3 +243,191 @@
     margin-left: clamp(20px, 9vw, 140px);
   }
 }
+
+
+/* =========================================================
+   GRID VARIANT — <div class="carousel grid">…</div>
+   • Tile: 300 × 400
+   • 4 tiles in one row (flush left; spacing only between tiles)
+   • Full image tiles
+   • On hover: a full‑width top overlay appears with fully visible text
+   • Arrow CTA bottom‑right (only on hover)
+   • No movement/JS — static grid with hover only
+   • Strong guards so .carousel.block styles don’t leak
+   ========================================================= */
+
+/* ---------- Base tokens ---------- */
+.carousel.grid {
+  --tile-w: 280px;
+  --tile-h: 400px;
+  --gap: 24px; 
+
+  --text-pad: 16px;
+  --title-size: clamp(18px, 2.2vw, 22px);
+  --body-size: clamp(13px, 1.6vw, 16px);
+
+  --cta-size: 56px;
+}
+
+/* ---------- 4‑tile grid viewport ---------- */
+.carousel.grid {
+  display: grid !important;
+  grid-auto-flow: column !important;
+  grid-auto-columns: var(--tile-w) !important;  /* fixed tile width */
+  grid-template-rows: var(--tile-h) !important; /* fixed tile height */
+  column-gap: var(--gap) !important;
+  row-gap: 0 !important;
+
+  /* show exactly 4 tiles with no outer whitespace */
+  width: calc(4 * var(--tile-w) + 3 * var(--gap));
+  max-width: 100%;
+  margin: 0;            /* flush to left edge */
+  padding: 0 -20px 0 0;           /* no white padding around */
+  background: transparent;
+  overflow: hidden !important;
+
+  /* neutralize unrelated carousel styles */
+  position: static !important;
+  min-height: auto !important;
+  color: inherit !important;
+}
+
+/* ---------- Tile (direct child) ---------- */
+.carousel.grid > div {
+  position: relative !important;
+  inset: auto !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+
+  width: var(--tile-w);
+  height: var(--tile-h);
+  border-radius: var(--radius);
+  overflow: hidden;
+  isolation: isolate;
+  background: #000; /* behind image */
+  box-shadow: 0 6px 22px rgb(0 0 0 / 12%);
+  transition: transform .18s ease;
+}
+.carousel.grid > div:hover { transform: translateY(-2px); }
+
+/* ---------- Media wrapper (first inner <div>) ---------- */
+.carousel.grid > div > div:first-child {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+}
+
+/* Images fill the tile */
+.carousel.grid picture,
+.carousel.grid img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* Subtle base wash; darken a bit more on hover for contrast */
+.carousel.grid > div::after {
+  content: "";
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgb(0 0 0 / .12), rgb(0 0 0 / .12));
+  transition: background .25s ease;
+}
+.carousel.grid > div:hover::after {
+  background: linear-gradient(180deg, rgb(0 0 0 / .30), rgb(0 0 0 / .30));
+}
+
+/* ---------- TOP‑LEFT text overlay (second inner <div>) ---------- */
+/* Sits at the very top-left and spans full width; appears on hover */
+.carousel.grid > div > div:last-child {
+  position: absolute !important;
+  top: 0px; left: -120px; right: 0px; bottom: 0px;
+  z-index: 2 !important;
+
+  background: rgb(0 0 0 / .62);     /* solid semi‑transparent for legibility */
+  color: #fff;
+  padding: var(--text-pad);
+  box-sizing: border-box;
+  
+
+  /* hidden until hover */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+
+/* Show overlay + text on hover */
+.carousel.grid > div:hover > div:last-child {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Text inside overlay — wrap so the full text stays inside the tile */
+.carousel.grid h2 {
+  margin: 0 0 6px;
+  font-weight: 800px;
+  font-size: var(--title-size);
+  line-height: 1.15;
+  word-break: break-word;
+}
+.carousel.grid p {
+  margin: 0;
+  font-size: var(--body-size);
+  line-height: 1.45;
+  opacity: .95;
+  word-break: break-word;
+}
+.carousel.grid a {
+  color: #ffd2dc;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.carousel.grid a:hover { color: #fff; }
+
+/* ---------- Arrow CTA (bottom-right; only on hover) ---------- */
+.carousel.grid > div::before {
+  content: "↗";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--cta-size);
+  height: var(--cta-size);
+  display: grid;
+  place-items: center;
+  z-index: 3;
+
+  background: #ef2b4f;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  border-top-left-radius: 10px;
+  box-shadow: 0 -2px 10px rgb(0 0 0 / 16%), -2px 0 10px rgb(0 0 0 / 16%);
+
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .18s ease, transform .18s ease, background .18s ease;
+}
+.carousel.grid > div:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+.carousel.grid > div:active::before { background: #ff3a60; }
+
+/* ---------- Accessibility: keyboard focus mirrors hover ---------- */
+.carousel.grid > div:focus-within > div:last-child,
+.carousel.grid > div:focus-visible > div:last-child {
+  opacity: 1;
+  pointer-events: auto;
+  outline: 2px solid #ef2b4f;
+  outline-offset: 2px;
+}
+.carousel.grid > div:focus-within::before,
+.carousel.grid > div:focus-visible::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Hide legacy carousel controls in grid variant ---------- */
+.carousel.grid .carousel__nav,
+.carousel.grid .carousel__index { display: none !important; }
