@@ -4,7 +4,7 @@
   position: relative;
   box-sizing: border-box;
   color: #111;
-  font-family: "Lato", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial;
+  font-family: Lato, Inter, system-ui, -apple-system, "Helvetica Neue", Arial;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -21,6 +21,7 @@
   flex: 0 0 48%;
   max-width: 48%;
 }
+
 .columnsfirst > div > div:first-child picture,
 .columnsfirst > div > div:first-child img {
   display: block;
@@ -40,18 +41,17 @@
 
 /* Heading style (desktop) */
 .columnsfirst h2 {
-  
 color: #0E0E0E;
-  font-family: "Lato", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-family: Lato, Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
   font-size: 30px;
   font-weight: 300;
   line-height: 1.02;
   margin: 0 0 12px;
   letter-spacing: -0.3px;
   hyphens: auto;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  padding: 10px 0 0 0;
+  hyphens: auto;
+  hyphens: auto;
+  padding: 10px 0 0;
 
 }
 
@@ -62,8 +62,8 @@ color: #0E0E0E;
 .columnsfirst h3[id^="the-"] {
  color: #EB1933;                
   font-size: 16px;               
-  font-family: "Lato", sans-serif;
-  padding: 15px 0px 20px;         
+  font-family: Lato, sans-serif;
+  padding: 15px 0 20px;         
   font-weight: 700;            
   letter-spacing: 1px;      
   text-transform: uppercase;
@@ -79,13 +79,14 @@ color: #0E0E0E;
 }
 
 /* Author avatar + name row */
+
 /* ========== Avatar + Name (h3 with picture) ========== */
 .columnsfirst > div > div:nth-child(2) h3#serviceabbas-bin-unmoor {
   /* put image + name on one line */
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  margin: 10px 0 0 0;
+  margin: 10px 0 0;
   font-size: 15px;              /* your size */
   text-transform: uppercase;     /* uppercase name */
   color: #111;                   /* dark text for name */

@@ -11,11 +11,12 @@
 /* card: keep vertical centering but control width for columns */
 .cardsfirst.block > ul >li {
     box-sizing: border-box;
+
     /* responsive widths: mobile single column, tablet 2 columns, desktop 4 columns */
     width: 100%;
     flex: 1 1 100%;
     margin: 0;
-    box-shadow: 0px 0px 10px 0px #00000045;
+    box-shadow: 0 0 10px 0 #00000045;
     padding: 25px 15px; /* slightly increased vertical padding for breathing room */
     text-align: center;
     position: relative; /* added for pseudo-element positioning */
@@ -44,11 +45,11 @@
 
 /* style the actual number */
 .cardsfirst.block > ul > li ul li {
-    font-family: 'Rajdhani', sans-serif;
+    font-family: Rajdhani, sans-serif;
     font-weight: 700;
     font-size: 50px; /* requested base size */
     line-height: 1;
-    color: #DDDDDD; /* requested color */
+    color: #DDD; /* requested color */
     margin: 0;
     padding: 0;
     -webkit-font-smoothing: antialiased;
@@ -62,7 +63,7 @@
 }
 
 /* smaller numbers on narrow screens so they never overlap content badly */
-@media (max-width: 599px) {
+@media (width <= 599px) {
   .cardsfirst.block > ul > li ul li {
     font-size: 40px;
     right: 12px;
@@ -71,13 +72,14 @@
 }
 
 /* keep existing larger-breakpoint adjustments if needed */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .cardsfirst.block > ul > li ul li {
     /* allow modest scale on wider viewports while preserving base 50px */
     font-size: 56px;
   }
 }
-@media (min-width: 900px) {
+
+@media (width >= 900px) {
   .cardsfirst.block > ul > li ul li {
     font-size: 64px;
   }
@@ -107,7 +109,7 @@
 
 /* make heading and any link inside it transition color */
 .cardsfirst.block > ul >li h2 {
-    font-family: 'Lato', sans-serif;
+    font-family: Lato, sans-serif;
     font-size: 21px;
     font-weight: 400;
     transition: color 180ms ease;
@@ -131,16 +133,17 @@
 
 .cardsfirst.block > ul >li p {
     color: #74787C;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: Rajdhani, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.4;
     margin: 0;
+
     /* color chosen to meet ~4.44:1 contrast against white background */
 }
 
 /* tablet: two columns */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .cardsfirst.block > ul >li {
     flex: 1 1 calc(50% - 12px); /* account for gap */
     width: calc(50% - 12px);
@@ -148,7 +151,7 @@
 }
 
 /* desktop: four columns */
-@media (min-width: 900px) {
+@media (width >= 900px) {
   .cardsfirst.block > ul >li {
     flex: 1 1 calc(25% - 18px); /* account for gap */
     width: calc(25% - 18px);

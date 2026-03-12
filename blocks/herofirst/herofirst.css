@@ -39,14 +39,14 @@
 .herofirst > div > div h2 {
   display: block;
   box-sizing: border-box;
-  color: #ffffff;
-  font-family: "Lato", sans-serif;
+  color: #fff;
+  font-family: Lato, sans-serif;
   font-size: 40px;
   font-weight: 700;
   line-height: 1.1;
   padding: 10px 24px 0;
   margin: 0 0 12px;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+  text-shadow: 0 1px 0 rgb(0 0 0 / 12%);
   width: auto; /* allow flex sizing on larger viewports */
 }
 
@@ -54,10 +54,10 @@
 .herofirst > div > div > p:last-of-type {
   display: inline-flex;
   background: #eb1933;
-  color: #ffffff;
+  color: #fff;
   padding: 10px 30px;
   border-radius: 999px;
-  font-family: "Rajdhani", sans-serif;
+  font-family: Rajdhani, sans-serif;
   font-size: 14px;
   text-transform: uppercase;
   margin-top: 16px;
@@ -81,11 +81,11 @@
   background: var(--brhovercolor);
   transform: translateY(-1px);
   outline: none;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 12%);
 }
 
 /* at tablet+ switch to horizontal layout: heading on left, CTA on right and vertically centered */
-@media (min-width: 600px) {
+@media (width >= 600px) {
   .herofirst > div > div {
     display: flex;
     align-items: center; /* vertical centering */
