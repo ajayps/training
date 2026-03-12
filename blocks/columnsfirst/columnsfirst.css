@@ -1,25 +1,201 @@
-/ * This file contains the CSS styles specific to the "columnsfirst" block, defining its layout and appearance. */
 
 .columnsfirst {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -15px; /* Adjust for gutter spacing */
+  padding: 48px 32px;
+  position: relative;
+  box-sizing: border-box;
+  color: #111;
+  font-family: "Lato", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .columnsfirst > div {
-  flex: 1 1 calc(33.333% - 30px); /* Three columns layout with spacing */
-  margin: 15px; /* Gutter spacing */
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+  align-items: center;
 }
 
-@media (max-width: 900px) {
-  .columnsfirst > div {
-    flex: 1 1 calc(50% - 30px); /* Two columns layout for tablets */
-  }
+/* left image column (about 48%) */
+.columnsfirst > div > div:first-child {
+  flex: 0 0 48%;
+  max-width: 48%;
+}
+.columnsfirst > div > div:first-child picture,
+.columnsfirst > div > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-@media (max-width: 600px) {
-  .columnsfirst > div {
-    flex: 1 1 100%; /* Single column layout for mobile */
-  }
+/* right content column */
+.columnsfirst > div > div:nth-child(2) {
+  flex: 1;
+  max-width: 52%;
+  padding-left: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading style (desktop) */
+.columnsfirst h2 {
+  
+color: #0E0E0E;
+  font-family: "Lato", "Inter", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.02;
+  margin: 0 0 12px;
+  letter-spacing: -0.3px;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  padding: 10px 0 0 0;
+
+}
+
+
+
+/* Subheading / kicker */
+.columnsfirst h3#the-journey-was-not-good-for-all-time,
+.columnsfirst h3[id^="the-"] {
+ color: #EB1933;                
+  font-size: 16px;               
+  font-family: "Lato", sans-serif;
+  padding: 15px 0px 20px;         
+  font-weight: 700;            
+  letter-spacing: 1px;      
+  text-transform: uppercase;
+
+}
+
+/* Paragraphs */
+.columnsfirst p {
+  margin: 0 0 18px;
+  color: #6f6f6f;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Author avatar + name row */
+/* ========== Avatar + Name (h3 with picture) ========== */
+.columnsfirst > div > div:nth-child(2) h3#serviceabbas-bin-unmoor {
+  /* put image + name on one line */
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0 0 0;
+  font-size: 15px;              /* your size */
+  text-transform: uppercase;     /* uppercase name */
+  color: #111;                   /* dark text for name */
+  line-height: 1.2;
+}
+
+/* Avatar shape and size */
+.columnsfirst > div > div:nth-child(2) h3#serviceabbas-bin-unmoor picture,
+.columnsfirst > div > div:nth-child(2) h3#serviceabbas-bin-unmoor picture img {
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: 0 0 60px;
+}
+
+/* Name weight */
+.columnsfirst > div > div:nth-child(2) h3#serviceabbas-bin-unmoor strong {
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* ========== Role line (appears below the name, aligned to the name) ========== */
+.columnsfirst h4#transpo-it {
+  color: #74787C;
+  font-weight: 400;
+  margin: 4px 0 0 72px;          /* 60px avatar + 12px gap = 72px indent */
+  line-height: 1.2;
+  overflow: visible;
+  text-transform: none;          /* keep role in normal case, like screenshot */
+  font-size: 15px;
+}
+
+/* ========== Learn More on the right with vertical divider and chevron ========== */
+.columnsfirst h4#learn-more {
+  margin: 0;                     /* reset */
+  float: right;                  /* push to right side */
+  padding: 0 10px 0 18px;        /* space around the text; left pad for divider */
+  border-left: 2px solid #EB1933;
+  line-height: 60px;             /* align vertically to avatar height */
+}
+
+/* Link style */
+.columnsfirst h4#learn-more a {
+  color: #EB1933;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Chevron */
+.columnsfirst h4#learn-more a::after {
+  content: "»";
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Hover (optional, subtle) */
+.columnsfirst h4#learn-more a:hover {
+  opacity: 0.9;
+}
+
+/* ========== Clear the float so following content (like <ul>) sits below ========== */
+.columnsfirst > div > div:nth-child(2) ul {
+  clear: both;
+  margin-top: 16px;
+}
+
+
+/* list of services - inline with dot icons */
+.columnsfirst ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.columnsfirst ul li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+  font-weight: 600;
+}
+
+.columnsfirst ul li::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #000;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Decorative accent removed for clean desktop view */
+.columnsfirst::after {
+  display: none !important;
+}
+
+/* Ensure images remain constrained */
+.columnsfirst picture img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
