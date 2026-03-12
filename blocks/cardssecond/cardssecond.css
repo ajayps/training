@@ -1,0 +1,201 @@
+/* ===== Layout for cards grid ===== */
+.cardssecond > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+}
+
+/* ===== Each card (<li>) ===== */
+.cardssecond > ul > li {
+  position: relative;             /* needed for ::before overlay */
+  overflow: visible;
+  border: 1px solid #dadada;
+  background-color: var(--background-color, #fff);
+  border-radius: 0px;            /* optional */
+  transition: color .25s ease;    /* smooth text color change */
+  isolation: isolate;             /* prevent z-index bleed */
+  height: 450px;
+}
+
+/* Spacing helpers if used */
+.cardssecond .cardssecond-card-body {
+  margin: 16px;
+}
+.cardssecond .cardssecond-card-image {
+  line-height: 0;
+}
+
+/* Images inside card */
+.cardssecond > ul > li img {
+  width: 20%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 15px 20px 2px;
+}
+
+/* ===== Red overlay that fills left -> right on hover ===== */
+.cardssecond > ul > li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #e60023;            /* red */
+  transform: scaleX(0);
+  transform-origin: left center;  /* grow from left */
+  transition: transform .45s ease;
+  z-index: 0;                     /* behind content */
+}
+
+
+
+.cardssecond > ul > li::after {
+  content: "";
+  position: absolute;
+  top: 0;                /* span entire card height */
+  bottom: 0;
+  left: -4px;            /* place just outside but touching the card edge */
+  width: 4px;            /* stripe thickness */
+  background: #e60023;   /* red */
+  border-radius: 0;      /* no rounded ends to avoid visible gaps */
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+.cardssecond > ul > li:hover::before {
+  transform: scaleX(1);
+}
+
+/* Keep content above the overlay */
+.cardssecond > ul > li > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Typography and links ===== */
+/* Headline link: inherit color (black normally, white on hover), no underline */
+.cardssecond h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.cardssecond h2 a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Text color switches to white when hovered */
+.cardssecond > ul > li:hover,
+.cardssecond > ul > li:hover h2,
+.cardssecond > ul > li:hover p,
+.cardssecond > ul > li:hover li {
+  color: #fff;
+}
+
+/* ===== Checkbox-styled inner list items ===== */
+/* Remove default bullets for inner lists */
+.cardssecond > ul > li ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;   /* anchor for pseudo CTA spacing below */
+  margin-bottom: 96px;  /* reserve space for the button below the list */
+}
+
+/* Checkbox line */
+.cardssecond > ul > li ul li {
+  position: relative;
+  padding-left: 36px;           /* space for the checkbox */
+  color: #000;                  /* black by default (turns white on hover via parent) */
+  line-height: 1.6;
+}
+
+/* Checkbox box */
+.cardssecond > ul > li ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2em;                   /* vertical alignment tweak */
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;  /* follows text color */
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+/* Checkmark inside the box */
+.cardssecond > ul > li ul li::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  width: 14px;
+  height: 10px;
+  background: currentColor;       /* follows text color */
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 14'><path d='M7.2 13.5L0.8 7.1l2.0-2.0 4.4 4.4L17.2 0.6l2.0 2.0L7.2 13.5z'/></svg>") no-repeat center / contain;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 14'><path d='M7.2 13.5L0.8 7.1l2.0-2.0 4.4 4.4L17.2 0.6l2.0 2.0L7.2 13.5z'/></svg>") no-repeat center / contain;
+}
+
+/* Ensure the checkbox + text flip to white on card hover */
+.cardssecond > ul > li:hover ul li {
+  color: #fff;
+}
+
+/* Optional: bullets inside inner lists align nicely on hover background */
+.cardssecond > ul > li:hover li {
+  list-style-position: inside;
+}
+
+/* ===== Pseudo CTA icon (no HTML changes) ===== */
+/* Red square button below the list (bottom-left) */
+.cardssecond > ul > li ul::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  bottom: -100px;                 /* sits inside the reserved space */
+  width: 56px;
+  height: 56px;
+  border-radius: 0px;
+  background: #e60023;
+  z-index: 1;                    /* above the card overlay */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* White arrow inside the button */
+.cardssecond > ul > li ul::before {
+  content: "";
+  position: absolute;
+  left: 24px;
+  bottom: -100px;
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  z-index: 2;                    /* above the red square */
+  background: #ffffff;           /* white arrow by default */
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M6 12h10M13 9l3 3-3 3' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center / 24px 24px;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M6 12h10M13 9l3 3-3 3' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>") no-repeat center / 24px 24px;
+}
+
+/* Invert CTA on card hover for contrast */
+.cardssecond > ul > li:hover ul::after {
+  background: #ffffff;           /* white button on hover */
+}
+.cardssecond > ul > li:hover ul::before {
+  background: #e60023;    /* keep both pseudo-elements aligned */
+}        /* red arrow on hover */
+
+
+/* ===== Reduced motion ===== */
+@media (prefers-reduced-motion: reduce) {
+  .cardssecond > ul > li::before,
+  .cardssecond > ul > li,
+  .cardssecond > ul > li ul::before,
+  .cardssecond > ul > li ul::after {
+    transition: none;
+  }
+}
+
+
