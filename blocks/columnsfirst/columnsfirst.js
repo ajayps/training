@@ -1,3 +1,4 @@
+
 /**
  * columnsfirst block:
  * - Wrap the last word of the H2 in a .highlight span
@@ -6,8 +7,8 @@
  */
 
 function escapeHtml(str) {
-  // minimal, safe escaping for text nodes we inject
-  return str.replace(/[&<>\"']/g, (m) => ({
+  // Minimal, safe escaping for text nodes we inject
+  return str.replace(/[&<>"']/g, (m) => ({
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
@@ -56,3 +57,4 @@ export default function decorate(block) {
     });
   });
 }
+
