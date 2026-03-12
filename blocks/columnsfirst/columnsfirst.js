@@ -1,4 +1,3 @@
-
 /**
  * columnsfirst block:
  * - Wrap the last word of the H2 in a .highlight span
@@ -57,4 +56,3 @@ export default function decorate(block) {
     });
   });
 }
-
