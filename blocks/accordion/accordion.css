@@ -1,0 +1,72 @@
+
+/* === Accordion left (vertical), image right (independent) === */
+.accordion {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px; /* left grows, right fixed */
+  grid-auto-rows: max-content;                 /* rows sized by each item's content */
+  align-items: stretch;                        /* stretch the right column across rows */
+  gap: 0;
+
+  /* Position the whole block */
+  max-width: 1100px;   /* adjust container width */
+  margin: 0;           /* hard-left; use margin:0 auto; to center if desired */
+  padding: 0 16px;
+}
+
+/* All accordion items remain stacked vertically in the left column */
+.accordion > * {
+  grid-column: 1;
+}
+
+/* Right-hand image as a single, independent column spanning all rows */
+.accordion::after {
+  content: "";
+  grid-column: 2;
+  grid-row: 1 / -1;          /* span the full height next to ALL items */
+  align-self: stretch;       /* stretch to total grid height */
+  display: block;
+
+  /* Image */
+  background-image: var(--accordion-aside-image, url("https://themeloto.com/wps/transpo/wp-content/uploads/2024/11/transpo-faq.jpg"));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  /* Frame */
+  border: 1px solid #dadada;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(17, 24, 39, 0.06);
+
+  /* Optional: guarantees visibility when there are very few items */
+  min-height: 320px;
+}
+
+
+
+/* Responsive: stack image below on small screens */
+@media (max-width: 768px) {
+  .accordion {
+    grid-template-columns: 1fr;
+  }
+  .accordion::after {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 220px;
+    margin-top: 16px;
+
+    /* Reposition decorative shapes for mobile */
+    background-position:
+      left -32px top 40px,
+      left -10px top 14px,
+      center;
+    background-size:
+      84px 72px,
+      84px 30px,
+      cover;
+  }
+}
+
+/* Easy image swap via CSS variable */
+:root {
+  --accordion-aside-image: url("https://themeloto.com/wps/transpo/wp-content/uploads/2024/11/transpo-faq.jpg");
+}

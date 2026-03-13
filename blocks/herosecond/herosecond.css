@@ -1,0 +1,162 @@
+
+/* Container reset per your snippet */
+.herosecond-container .hero-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* ---- Hero base ---- */
+.herosecond {
+  position: relative;
+  padding: 48px 10px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;      
+  justify-content: center; 
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate; 
+}
+
+/* Background image via <picture> stays behind content */
+.herosecond picture {
+  position: absolute;
+  inset: 0;
+  z-index: -2;       /* behind overlay */
+  display: block;
+}
+
+.herosecond img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark overlay for readability */
+.herosecond::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* Subtle top-to-bottom vignette; adjust opacity as needed */
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.55) 40%,
+      rgba(0, 0, 0, 0.65) 100%
+  );
+}
+
+/* ---- Content wrapper (uses your existing nested divs) ---- */
+.herosecond > div > div {
+  /* constrain line length for large screens */
+  max-width: 1100px;
+  margin-inline: auto;
+  color: #e8eef2; /* default text color on the hero */
+}
+
+/* Kill the spacer <p> that only wraps the <picture> */
+.herosecond > div > div > p:has(picture) {
+  margin: 0;
+}
+
+/* ---- Typography ---- */
+.herosecond h2 {
+  margin: 0 0 12px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.2px;
+  color: #ffffff; /* heading should pop */
+}
+
+/* Your HTML wraps text in <strong> inside <h2>—make sure it inherits size */
+.herosecond h2 strong {
+  font-weight: 700;
+}
+
+/* Scale heading across breakpoints */
+@media (max-width: 599.98px) {
+  .herosecond h2 { font-size: clamp(28px, 8vw, 36px); }
+}
+@media (min-width: 600px) and (max-width: 899.98px) {
+  .herosecond h2 { font-size: clamp(36px, 5.8vw, 48px); }
+}
+@media (min-width: 900px) {
+  .herosecond h2 { font-size: clamp(44px, 4.6vw, 72px); }
+}
+
+/* Subheading paragraph (the second <p>) */
+.herosecond h2 + p {
+  margin: 0 auto 28px;
+  max-width: 900px;
+  color: #cdd6dd;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+/* ---- CTA row (the third <p> contains the two links) ---- */
+.herosecond h2 + p + p {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Base button style for both <a> links */
+.herosecond h2 + p + p a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  padding: 16px 28px;
+  border-radius: 999px; /* full pill */
+  border: 2px solid transparent;
+  transition: all 160ms ease;
+  white-space: nowrap;
+}
+
+/* Primary (first link = phone) */
+.herosecond h2 + p + p a:first-of-type {
+  background: #e53935;       /* red fill */
+  color: #ffffff;
+  border-color: #e53935;
+  box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.4);
+}
+.herosecond h2 + p + p a:first-of-type:hover {
+  background: #d32f2f;
+  border-color: #d32f2f;
+  transform: translateY(-1px);
+}
+
+/* Secondary (second link = outlined) */
+.herosecond h2 + p + p a:last-of-type {
+  background: transparent;
+  color: #ff5a57;             /* red text */
+  border-color: #ff5a57;      /* red outline */
+}
+.herosecond h2 + p + p a:last-of-type:hover {
+  background: rgba(255, 90, 87, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Fine-tune outer padding on wide screens (keeps edges breathing) */
+@media (min-width: 900px) {
+  .herosecond {
+    padding: 56px 32px;
+    min-height: 420px;
+  }
+}
+
+/* Optional: respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .herosecond * {
+    transition: none !important;
+  }
+}
+
